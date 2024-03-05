@@ -1,10 +1,11 @@
-# file_object = open(r"File_name", "w")
-# with open('File_name', 'a') as file:
-#     file.write('Also a nice person\n')
-# file.close()
+from cryptography.fernet import Fernet
 
-with open('user_credentials.txt', 'r') as file:
-    for line in file:
-        exist_email = line.strip().split('|')
-        print(exist_email[0])
+key = Fernet.generate_key()
+f = Fernet(key)
 
+password = f.encrypt(b'Eldridge')
+password = password.decode()
+print(password)
+
+dec_pw = f.decrypt(password)
+print(dec_pw.decode())
